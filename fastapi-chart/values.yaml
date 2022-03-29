@@ -14,30 +14,6 @@ imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
-backend:
-  envAddresses: # These entries will be turned into environment variables looking like "Settings_ServiceBaseUrl: http://color-canary/" or "Settings_ServiceBaseUrl: http://color-canary.namespace.svc.cluster.local/"
-    # Settings__ServiceBaseUrl: color-canary
-
-probes:
-  enabled: false
-
-deployment:
-  containerPort: 80
-
-appMesh:
-  enabled: true
-  outsideTrafficAllowed: true
-  fargatePodServiceAccount: # envoy-fargate-pod-svcaccount # Specify when running on EKS Fargate nodes
-  gatewayRouteMatchPrefix: # Supply override here, otherwise it's "/service-name"
-
-  healthCheck:
-    healthyThreshold: 2
-    intervalMillis: 5000
-    path: / # Must return 200, not Redirect (3xx) or 4xx or 5xx
-    protocol: http
-    timeoutMillis: 2000
-    unhealthyThreshold: 2
-
 serviceAccount:
   # Specifies whether a service account should be created
   create: true
@@ -60,6 +36,26 @@ securityContext: {}
   # runAsNonRoot: true
   # runAsUser: 1000
 
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: chart-example.local
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little
@@ -72,11 +68,11 @@ resources: {}
   #   cpu: 100m
   #   memory: 128Mi
 
-# autoscaling:
-#   enabled: false
-#   minReplicas: 1
-#   maxReplicas: 100
-#   targetCPUUtilizationPercentage: 80
+autoscaling:
+  enabled: true
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
   # targetMemoryUtilizationPercentage: 80
 
 nodeSelector: {}
