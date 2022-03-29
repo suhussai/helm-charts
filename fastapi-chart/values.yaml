@@ -1,0 +1,86 @@
+# Default values for fastapi_chart.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: 846129105937.dkr.ecr.us-west-2.amazonaws.com/fastapi_app
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "latest"
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+backend:
+  envAddresses: # These entries will be turned into environment variables looking like "Settings_ServiceBaseUrl: http://color-canary/" or "Settings_ServiceBaseUrl: http://color-canary.namespace.svc.cluster.local/"
+    # Settings__ServiceBaseUrl: color-canary
+
+probes:
+  enabled: false
+
+deployment:
+  containerPort: 80
+
+appMesh:
+  enabled: true
+  outsideTrafficAllowed: true
+  fargatePodServiceAccount: # envoy-fargate-pod-svcaccount # Specify when running on EKS Fargate nodes
+  gatewayRouteMatchPrefix: # Supply override here, otherwise it's "/service-name"
+
+  healthCheck:
+    healthyThreshold: 2
+    intervalMillis: 5000
+    path: / # Must return 200, not Redirect (3xx) or 4xx or 5xx
+    protocol: http
+    timeoutMillis: 2000
+    unhealthyThreshold: 2
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+# autoscaling:
+#   enabled: false
+#   minReplicas: 1
+#   maxReplicas: 100
+#   targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
