@@ -29,6 +29,9 @@ serviceAccount:
 
 podAnnotations: {}
 
+livenessProbePath: "/health"
+readinessProbePath: "/health"
+
 podSecurityContext: {}
   # fsGroup: 2000
 
@@ -46,9 +49,9 @@ service:
 
 ingress:
   enabled: true
-  className: "nginx"
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: "/$2"
+    kubernetes.io/ingress.class: "nginx"
   hosts:
     - host: "*"
       paths:
