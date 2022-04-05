@@ -38,6 +38,10 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.namespace
+            - name: ROLE_ARN
+              value: {{ .Values.application.role_arn }}
+            - name: BUCKET_NAME
+              value: {{ .Values.application.bucket_name }}
           ports:
             - name: http
               containerPort: 80

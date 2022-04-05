@@ -10,6 +10,10 @@ image:
   # Overrides the image tag whose default is the chart appVersion.
   tag: "v9"
 
+application:
+  role_arn: ""
+  bucket_name: ""
+
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
