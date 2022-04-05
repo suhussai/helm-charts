@@ -45,9 +45,9 @@ ingress:
   className: "nginx"
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: "/$2"
-    kubernetes.io/tls-acme: "true"
   hosts:
-    - paths:
+    - host: fastapi
+      paths:
         - path: "/scans(/|$)(.*)"
           pathType: Prefix
   tls: []

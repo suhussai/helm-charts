@@ -49,9 +49,9 @@ ingress:
   className: "nginx"
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: "/$2"
-    kubernetes.io/tls-acme: "true"
   hosts:
-    - paths:
+    - host: token_vendor
+      paths:
         - path: "/token(/|$)(.*)"
           pathType: Prefix
   tls: []
