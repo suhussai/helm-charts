@@ -49,8 +49,7 @@ ingress:
     nginx.ingress.kubernetes.io/rewrite-target: "/$2"
     kubernetes.io/ingress.class: "nginx"
   hosts:
-    - host: fastapi
-      paths:
+    - paths:
         - path: "/scans(/|$)(.*)"
           pathType: Prefix
   tls: []
