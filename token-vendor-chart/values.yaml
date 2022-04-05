@@ -50,8 +50,7 @@ ingress:
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: "/$2"
   hosts:
-    - host: token
-      paths:
+    - paths:
         - path: "/token(/|$)(.*)"
           pathType: Prefix
   tls: []
