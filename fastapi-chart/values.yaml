@@ -31,6 +31,10 @@ readinessProbePath: "/health"
 podSecurityContext: {}
   # fsGroup: 2000
 
+application:
+  token_vendor_endpoint: ""
+  token_vendor_endpoint_port: ""
+
 securityContext: {}
   # capabilities:
   #   drop:
