@@ -47,8 +47,7 @@ ingress:
     nginx.ingress.kubernetes.io/rewrite-target: "/$2"
     kubernetes.io/tls-acme: "true"
   hosts:
-    - host: chart-example.local
-      paths:
+    - paths:
         - path: "/scans(/|$)(.*)"
           pathType: Prefix
   tls: []
