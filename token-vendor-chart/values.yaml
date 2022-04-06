@@ -7,6 +7,7 @@ replicaCount: 1
 image:
   repository: 846129105937.dkr.ecr.us-west-2.amazonaws.com/token_vendor
   pullPolicy: IfNotPresent
+  tag: "v19"
 
 application:
   role_arn: ""

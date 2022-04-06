@@ -7,6 +7,7 @@ replicaCount: 1
 image:
   repository: 846129105937.dkr.ecr.us-west-2.amazonaws.com/fastapi_app
   pullPolicy: IfNotPresent
+  tag: "v11"
   # Overrides the image tag whose default is the chart appVersion.
 
 imagePullSecrets: []
