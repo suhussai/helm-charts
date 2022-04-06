@@ -38,6 +38,8 @@ spec:
               value: {{ .Values.application.token_vendor_endpoint}}
             - name: TOKEN_VENDOR_ENDPOINT_PORT
               value: {{ .Values.application.token_vendor_endpoint_port }}
+            - name: BUCKET_NAME
+              value: {{ .Values.application.bucket_name }}
           ports:
             - name: http
               containerPort: 80
