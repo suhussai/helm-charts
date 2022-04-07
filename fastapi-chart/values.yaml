@@ -52,6 +52,7 @@ ingress:
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: "/$2"
     kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/proxy-body-size: "16m"
   hosts:
     - paths:
         - path: "/uploads(/|$)(.*)"
